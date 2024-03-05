@@ -8,9 +8,9 @@ import com.raffaelbrandao.model.Person;
 import com.raffaelbrandao.service.PersonService;
 
 import jakarta.annotation.PostConstruct;
-import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
+import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.validation.constraints.NotNull;
@@ -18,11 +18,12 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Named
-@RequestScoped
+@ViewScoped
 public class PersonBean implements Serializable {
 	private static final long serialVersionUID = -7360206069474825862L;
 
 	@Getter
+	@Setter
 	private List<Person> people;
 
 	@Setter
@@ -34,13 +35,15 @@ public class PersonBean implements Serializable {
 	@PostConstruct
 	public void init() {
 
-		this.people = findAll();
+		setPeople(findAll());
 	}
 
 	public void save() {
 		service.save(getPerson());
 		people.add(getPerson());
 		setPerson(new Person());
+		FacesContext.getCurrentInstance().addMessage(null,
+				new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "The record was created successfully."));
 	}
 
 	public Person findById(@NotNull Long id) {
