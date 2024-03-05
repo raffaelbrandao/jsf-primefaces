@@ -12,15 +12,16 @@
 				<p:autoUpdate />
 			</p:messages>
 			<p:dataTable widgetVar="items" var="item"
-				value="#{personBean.people}" editable="true">
+				value="#{personBean.people}" editable="true" id="personTable">
 				<f:facet name="header">
                People
             </f:facet>
 
 				<p:ajax event="rowEdit" listener="#{personBean.update(item.id)}"
-					update=":form:messages" />
+					update=":form:messages :form:personTable" />
 				<p:ajax event="rowEditCancel"
-					listener="#{personBean.delete(item.id)}" update=":form:messages" />
+					listener="#{personBean.delete(item.id)}"
+					update=":form:messages :form:personTable" />
 
 				<p:column headerText="Name">
 					<p:cellEditor>
@@ -36,7 +37,9 @@
 				<p:column headerText="Birthday">
 					<p:cellEditor>
 						<f:facet name="output">
-							<h:outputText value="#{item.birthday}" />
+							<h:outputText value="#{item.birthday}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
 						</f:facet>
 						<f:facet name="input">
 							<p:calendar value="#{item.birthday}" pattern="dd/MM/yyyy"
@@ -65,32 +68,52 @@
 
 			<div class="grid mt-3">
 				<div class="col-12">
-					<p:commandButton value="Add new person O"
-						onclick="PF('dlg1').show()" />
+					<p:commandButton value="Add new person" onclick="PF('dlg1').show()" />
 				</div>
 			</div>
 
 		</h:form>
 
-		<p:dialog header="Basic Dialog" widgetVar="dlg1" minHeight="40">
+		<p:dialog header="Add Person" widgetVar="dlg1" minHeight="40">
 			<div class="card">
-				<h5>Add Person</h5>
 				<h:form id="formAdd">
-					<p:inputText id="nameAdd" value="#{personBean.person.name}"
-						style="width:100%" label="Name" />
-					<p:calendar id="birthdayAdd" value="#{personBean.person.birthday}"
-						pattern="dd/MM/yyyy" showOn="button" style="width:100%"
-						label="Birthday" />
-					<h:selectOneMenu id="genderAdd" value="#{personBean.person.gender}"
-						required="true" label="Gender">
-						<f:selectItem itemLabel="Select One" itemValue="" />
-						<f:selectItems value="#{personBean.genders()}" var="gender"
-							itemValue="#{gender}" itemLabel="#{gender.name}" />
-					</h:selectOneMenu>
-
-					<p:commandButton id="buttonAdd" value="Add" process="@form"
-						update=":form:messages" action="#{personBean.save()}"
-						oncomplete="PF('items').addRow();" />
+					<h5>New Person</h5>
+					<div class="field grid">
+						<p:outputLabel for="nameAdd" styleClass="col-fixed"
+							style="width:100px" value="Full Name" />
+						<div class="col">
+							<p:inputText id="nameAdd" value="#{personBean.person.name}"
+								style="width:100%" label="Name" />
+						</div>
+					</div>
+					<div class="field grid">
+						<p:outputLabel for="birthdayAdd" styleClass="col-fixed"
+							style="width:100px" value="Birthday" />
+						<div class="col">
+							<p:calendar id="birthdayAdd"
+								value="#{personBean.person.birthday}" pattern="dd/MM/yyyy"
+								showOn="button" style="width:100%" label="Birthday" />
+						</div>
+					</div>
+					<div class="field grid">
+						<p:outputLabel for="genderAdd" styleClass="col-fixed"
+							style="width:100px" value="Birthday" />
+						<div class="col">
+							<h:selectOneMenu id="genderAdd"
+								value="#{personBean.person.gender}" required="true"
+								label="Gender">
+								<f:selectItem itemLabel="Select One" itemValue="" />
+								<f:selectItems value="#{personBean.genders()}" var="gender"
+									itemValue="#{gender}" itemLabel="#{gender.name}" />
+							</h:selectOneMenu>
+						</div>
+						<div class="field grid">
+							<p:commandButton id="buttonAdd" value="Add" process="@form"
+								update=":form:messages :form:personTable"
+								action="#{personBean.save()}"
+								oncomplete="PF('items').addRow() PF('dlg1').hide()" />
+						</div>
+					</div>
 				</h:form>
 			</div>
 		</p:dialog>
