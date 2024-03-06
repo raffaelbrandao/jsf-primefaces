@@ -1,8 +1,8 @@
-package com.raffaelbrandao.dao;
+package com.raffaelbrandao.demo.dao;
 
 import java.util.List;
 
-import com.raffaelbrandao.model.Person;
+import com.raffaelbrandao.demo.model.Person;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;

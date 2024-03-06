@@ -1,11 +1,11 @@
-package com.raffaelbrandao.bean;
+package com.raffaelbrandao.demo.bean;
 
 import java.io.Serializable;
 import java.util.List;
 
-import com.raffaelbrandao.enums.Gender;
-import com.raffaelbrandao.model.Person;
-import com.raffaelbrandao.service.PersonService;
+import com.raffaelbrandao.demo.enums.Gender;
+import com.raffaelbrandao.demo.model.Person;
+import com.raffaelbrandao.demo.service.PersonService;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.application.FacesMessage;

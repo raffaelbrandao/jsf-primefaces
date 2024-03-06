@@ -1,4 +1,4 @@
-package com.raffaelbrandao.enums;
+package com.raffaelbrandao.demo.enums;
 
 import lombok.Getter;
 

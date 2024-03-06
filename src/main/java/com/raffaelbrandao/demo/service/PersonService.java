@@ -1,9 +1,9 @@
-package com.raffaelbrandao.service;
+package com.raffaelbrandao.demo.service;
 
 import java.util.List;
 
-import com.raffaelbrandao.dao.PersonDAO;
-import com.raffaelbrandao.model.Person;
+import com.raffaelbrandao.demo.dao.PersonDAO;
+import com.raffaelbrandao.demo.model.Person;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;

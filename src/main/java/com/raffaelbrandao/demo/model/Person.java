@@ -1,9 +1,9 @@
-package com.raffaelbrandao.model;
+package com.raffaelbrandao.demo.model;
 
 import java.util.Date;
 import java.util.List;
 
-import com.raffaelbrandao.enums.Gender;
+import com.raffaelbrandao.demo.enums.Gender;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
