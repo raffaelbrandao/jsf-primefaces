@@ -1,4 +1,4 @@
-package com.raffaelbrandao.bean;
+package com.raffaelbrandao.demo.bean;
 
 public class PessoaBean {
 	
